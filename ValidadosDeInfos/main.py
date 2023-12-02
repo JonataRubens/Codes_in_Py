@@ -10,6 +10,7 @@ def Validador(dados, infosEsperadas):
         linhas = dados.readlines()
         for linha in linhas:
             chave, valor = linha.strip().split(':')
+            print(f'{infosEsperadas[chave]}')
             
             if chave in infosEsperadas:
                 if infosEsperadas[chave] == valor.strip():
