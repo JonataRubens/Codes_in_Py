@@ -12,9 +12,6 @@ cor = "#dedcdc" #cinza
 janela=Tk()
 janela.title('---------------')
 janela.geometry('380x280')
-#janela.resizable(width = False, height = False)
-#janela.configure(bg=cor)
-
 
 label1= Label(
     janela,
