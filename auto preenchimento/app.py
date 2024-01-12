@@ -2,13 +2,15 @@ import pyperclip
 import openpyxl
 import pyautogui
 
-workbook = openpyxl.load_workbook('/F:\Repo_GitHub\Codes_in_Py\auto preenchimento\produtos_ficticios.xlsx')
-sheet_produto = workbook['produtos']
+workbook = openpyxl.load_workbook('F:/Repo_GitHub/Codes_in_Py/auto preenchimento/produtos_ficticios.xlsx')
+print(workbook.sheetnames)
+
+sheet_produto = workbook['Produtos']
 
 for linha in sheet_produto.iter_rows(min_row=2):
     nome_produto = linha[0].value
     pyperclip.copy(nome_produto)
-    pyautogui.click(x=375, y=335)
+    pyautogui.click(x=375, y=335,duration=2)
     pyautogui.hotkey('ctrl', 'v')
     #descricao_produto = linha[1].value
     #categoria_produto = linha[2].value
