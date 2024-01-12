@@ -14,5 +14,5 @@ def is_key_pressed():
 
 # Loop que clica no local especificado até a tecla ser pressionada
 while not is_key_pressed():
-    time.sleep(2)
+    time.sleep(1)
     pyautogui.click(x, y)
