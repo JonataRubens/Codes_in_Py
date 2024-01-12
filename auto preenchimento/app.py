@@ -2,7 +2,7 @@ import pyperclip
 import openpyxl
 import pyautogui
 
-workbook = openpyxl.load_workbook('produtos_ficticios.xlsx')
+workbook = openpyxl.load_workbook('/F:\Repo_GitHub\Codes_in_Py\auto preenchimento\produtos_ficticios.xlsx')
 sheet_produto = workbook['produtos']
 
 for linha in sheet_produto.iter_rows(min_row=2):
