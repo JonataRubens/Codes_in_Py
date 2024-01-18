@@ -56,12 +56,15 @@ tabela = [["1","2","3"], ["4","5","6"], ["7","8","9"]]
 jogando = "X"
 jogar = ""
 contador = 0
+contador_rodada = 0
 
 def inicia_jogo():
+    b_jogar.place(x=800, y=350)
     def controlador(i):
         global jogando
         global contador
         global jogar
+        global contador_rodada
         
         if i==str(1):
             if b_0["text"] =="":
@@ -470,10 +473,119 @@ def inicia_jogo():
         
 
     def vencedor(i):
-        print(i)
+        global tabela
+        global score_1
+        global score_2
+        global contador_rodada
+        global contador
+        
+        b_0['state'] = "disabled"
+        b_1['state'] = "disabled"
+        b_2['state'] = "disabled"
+        b_3['state'] = "disabled"
+        b_4['state'] = "disabled"
+        b_5['state'] = "disabled"
+        b_6['state'] = "disabled"
+        b_7['state'] = "disabled"
+        b_8['state'] = "disabled"
+
+        
+        app_vencedor = Label(frame_baixo, text="", height=1, relief="flat", anchor="center", font=("Ivy 13 bold"), bg=co1, fg=co2)
+        app_vencedor.place(x=40, y=220)
+        
+        if i =='X':
+            score_2 += 1
+            app_vencedor['text'] = "Jogador 2 venceu"
+            app_o_pontos['text'] = score_2
+        
+        if i =='O':
+            score_1 += 1
+            app_vencedor['text'] = "Jogador 1 venceu"
+            app_x_pontos['text'] = score_1
+            
+        if i =='foi empate':
+            app_vencedor['text'] = "Empate"
+            
+        
+        def start(b_0, b_1, b_2, b_3, b_4, b_5, b_6, b_7, b_8):
+            b_0['text'] = ""
+            b_1['text'] = ""
+            b_2['text'] = ""
+            b_3['text'] = ""
+            b_4['text'] = ""
+            b_5['text'] = ""
+            b_6['text'] = ""
+            b_7['text'] = ""
+            b_8['text'] = ""
+            
+            b_0['state'] = "normal"
+            b_1['state'] = "normal"
+            b_2['state'] = "normal"
+            b_3['state'] = "normal"
+            b_4['state'] = "normal"
+            b_5['state'] = "normal"
+            b_6['state'] = "normal"
+            b_7['state'] = "normal"
+            b_8['state'] = "normal"
+            
+            app_vencedor.destroy()
+            b_jogar.destroy()
+
+        b_jogar = Button(frame_baixo, command=lambda: start(b_0, b_1, b_2, b_3, b_4, b_5, b_6, b_7, b_8), text="jogaDNV", width=10, height=1, relief="raise", overrelief=RIDGE, font=("Ivy 10 bold"), bg=fundo, fg=co0)
+        b_jogar.place(x=85, y=196)
+
+        
+        def jogo_acabou():
+            b_jogar.destroy()
+            app_vencedor.destroy()
+            
+            terminar()
+            
+        if contador_rodada >= 5:
+            jogo_acabou()
+        else:
+            contador_rodada += 1
+            
+            tabela = [["1","2","3"], ["4","5","6"], ["7","8","9"]]
+            contador = 0
+            
         
     def terminar():
-        pass
+        global tabela
+        global contador_rodada
+        global score_1  
+        global score_2
+        global contador
+        global contador_rodada
+        
+        tabela = [["1","2","3"], ["4","5","6"], ["7","8","9"]]
+        contador_rodada = 0
+        score_1 = 0
+        score_2 = 0
+        contador = 0
+        
+        b_0['state'] = "disabled"
+        b_1['state'] = "disabled"
+        b_2['state'] = "disabled"
+        b_3['state'] = "disabled"
+        b_4['state'] = "disabled"
+        b_5['state'] = "disabled"
+        b_6['state'] = "disabled"
+        b_7['state'] = "disabled"
+        b_8['state'] = "disabled"
+        
+        app_fim = Label(frame_baixo, text="Fim", width= 17, relief="flat", anchor="center", font=("Ivy 13 bold"), bg=co1, fg=co2)
+        app_fim.place(x=25, y=90)
+        
+        def jogar_de_novo():
+            app_x_pontos['text'] = '0'
+            app_o_pontos['text'] = '0'
+            app_fim.destroy()
+            b_jogar.destroy()
+            inicia_jogo()
+            
+        b_jogar= Button(frame_baixo, command =jogar_de_novo,text="jogar", width=10, relief= "raise",overrelief=RIDGE, font=("Ivy 10 bold"), bg=fundo, fg=co0)
+        b_jogar.place(x=85, y=196)
     
     #linhas verticais
     app_ = Label(frame_baixo, text="", height=23, relief= "flat", pady=5, anchor= "center", font=("Ivy 5 bold"), bg=co0, fg=co0)
@@ -514,9 +626,7 @@ def inicia_jogo():
 
 
 #linha 0
-
-
 b_jogar= Button(frame_baixo, command =inicia_jogo,text="jogar", width=10, relief= "raise", overrelief=RIDGE, font=("Ivy 10 bold"), bg=fundo, fg=co0)
-b_jogar.place(x=85, y=210)
+b_jogar.place(x=85, y=196)
 
 janela.mainloop()
